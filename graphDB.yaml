@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphdb
+  template:
+    metadata:
+      labels:
+        app: graphdb
+    spec:
+      containers:
+      - name: graphdb
+        #image: ontotext/graphdb:11.5.0-arm64
+        image: khaller/graphdb-free:10.8.4
+        ports:
+        - containerPort: 7200
+          name: http
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-graphdb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 7200
+    targetPort: 7200
+    name: http
+  selector:
+    app: graphdb

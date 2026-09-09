@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphdb-mcp
+  labels:
+    app: graphdb-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphdb-mcp
+  template:
+    metadata:
+      labels:
+        app: graphdb-mcp
+    spec:
+      containers:
+      - name: mcp-server
+        image: developeronizuka/graphdb-mcp:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5001
+          name: sse-port
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-graphdb-mcp
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5001
+    targetPort: 5001
+    name: sse-port
+  selector:
+    app: graphdb-mcp
