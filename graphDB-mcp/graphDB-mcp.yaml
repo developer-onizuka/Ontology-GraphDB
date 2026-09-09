@@ -17,7 +17,7 @@ spec:
       containers:
       - name: mcp-server
         image: developeronizuka/graphdb-mcp:1.0.0
-        imagePullPolicy: Always
+        #imagePullPolicy: Always
         ports:
         - containerPort: 5001
           name: sse-port

@@ -14,7 +14,7 @@ def register_ontology_from_text(domain: str, turtle_data: str) -> str:
     target_graph = f"http://example.org/{domain}"
 
     # Named Graphを指定して、TurtleデータをそのままPOSTするURL
-    url = f"http://svc-graphdb:7200/repositories/ontology-repo/statements?graph=<{target_graph}>"
+    url = f"http://svc-graphdb:7200/repositories/ontology-repo/statements?context=<{target_graph}>"
 
     headers = {"Content-Type": "text/turtle; charset=utf-8"}
     response = requests.post(url, data=turtle_data.encode("utf-8"), headers=headers)

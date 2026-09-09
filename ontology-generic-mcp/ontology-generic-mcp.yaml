@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ontology-generic-mcp
+  labels:
+    app: ontology-generic-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ontology-generic-mcp
+  template:
+    metadata:
+      labels:
+        app: ontology-generic-mcp
+    spec:
+      containers:
+      - name: generic-mcp
+        image: developeronizuka/ontology-generic-mcp:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5001
+          name: sse-port
+        env:
+        - name: GRAPHDB_BASE_URL
+          value: "http://svc-graphdb:7200"
+        - name: GRAPHDB_REPO
+          value: "ontology-repo"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-ontology-generic-mcp
+spec:
+  type: LoadBalancer
+  selector:
+    app: ontology-generic-mcp
+  ports:
+  - port: 5001
+    targetPort: 5001
+    name: sse
