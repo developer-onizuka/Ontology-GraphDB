@@ -132,12 +132,11 @@ ex:fukuzawa_yukichi ex:founded ex:keio_gijuku .
 │  - Cross-domain or isolated Named Graph querying       │
 └────────────────────────────────────────────────────────┘
 ```
-
-<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/biology.png" width="720"><br>
-
+### 3. ClaudeDesktopでのオントロジー登録の例
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/ClaudeDesktop-rabbit.png" width="720"><br>
 
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/keio.png" width="720"><br>
 
-<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/ClaudeDesktop-Keio.png" width="720"><br>
 
+### 4. 単語の関係性が不明なオントロジー
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/biology.png" width="720"><br>
