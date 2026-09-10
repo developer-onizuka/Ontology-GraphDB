@@ -107,6 +107,15 @@ ex:keio_gijuku a ex:Institution ;
 
 ex:fukuzawa_yukichi ex:founded ex:keio_gijuku .
 ```
+#### 2-1-1. Inspectorによるデバッグ
+以下コマンドでInspectorを立ち上げます。ここで上記のTurtle Formatを入力して正しくオントロジーが登録されるかを確認します。
+```
+% npx @modelcontextprotocol/inspector http://192.168.33.5:5001/sse
+```
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector1.png" width="720"><br>
+
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector2.png" width="720"><br>
+
 
 #### 2-2. オントロジー検索・参照フロー (Query & Inspection Flow: `ontology-generic-mcp`)
 ```
