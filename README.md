@@ -1,32 +1,56 @@
 # Ontology-GraphDB
 ```
 [ User ]
-   │ 1. Drag & Drop PDF / Word + Prompt
+   │ 1. Natural Language Prompt / Document Input such as Turtle Format (Rabbit) or (Keio) etc
    ▼
 ┌────────────────────────────────────────────────────────┐
 │ Claude Desktop (LLM Interface)                         │
-│  - Document text extraction & semantic analysis        │
-│  - Entity & relation extraction (S-P-O structuring)    │
+│  - Semantic analysis & text comprehension              │
+│  - Entity & relation extraction (Turtle format)        │
 └──┬─────────────────────────────────────────────────────┘
-   │ 2. Pass structured data (Turtle format / JSON) as JSON arguments to the MCP tool
-   ▼ (JSON-RPC / SSE)
+   │ 2. Invoke register_ontology_from_text (JSON-RPC / SSE)
+   ▼
 ┌────────────────────────────────────────────────────────┐
-│ MCP Server Pod (Kubernetes)                            │ graphDM-mcp.yaml & graphDB-mcp.py
-│  - Tool execution (e.g., register_ontology)            │
-│  - Payload validation & SPARQL query construction      │
+│ Kubernetes Pod: graphDB-mcp                            │ graphDB-mcp.yaml & graphDB-mcp.py
+│  - Tool execution (register_ontology_from_text)        │
+│  - Context parameter mapping (?context=<URI>)          │
 └──┬─────────────────────────────────────────────────────┘
-   │ 3. SPARQL Update (INSERT DATA)
+   │ 3. HTTP POST Statements (Data persistence)
    ▼
 ┌────────────────────────────────────────────────────────┐
 │ GraphDB (Kubernetes)                                   │ graphDB.yaml
-│  - Persist triples in the specified Named Graph        │
-│    (e.g., http://example.org/domain.owl)               │
+│  - Repository: ontology-repo                           │
+│  - Store triples in the designated Named Graph         │
+│    (e.g., http://example.org/{domain})                 │
 └────────────────────────────────────────────────────────┘
 ```
 ```
+[ User ]
+   │ 1. Inquiry / Query Request
+   ▼
+┌────────────────────────────────────────────────────────┐
+│ Claude Desktop (LLM Interface)                         │
+│  - Determine necessary query or inspection scope       │
+└──┬─────────────────────────────────────────────────────┘
+   │ 2. Invoke execute_sparql_select / list_named_graphs / describe_resource
+   ▼
+┌────────────────────────────────────────────────────────┐
+│ Kubernetes Pod: ontology-generic-mcp                   │ ontology-generic-mcp.yaml & ontology-generic-mcp.py
+│  - Execute SPARQL SELECT / DESCRIBE queries            │
+│  - Retrieve JSON / Turtle results                      │
+└──┬─────────────────────────────────────────────────────┘
+   │ 3. HTTP GET (SPARQL / DESCRIBE request)
+   ▼
+┌────────────────────────────────────────────────────────┐
+│ GraphDB (Kubernetes)                                   │ graphDB.yaml
+│  - Repository: ontology-repo                           │
+│  - Cross-domain or isolated Named Graph querying       │
+└────────────────────────────────────────────────────────┘
+```
+#### Turtle Format (Rabbit)
+```
 うさぎは亀を追い抜かしました。
 ```
-- turtle形式
 ```
 @prefix ex: <http://example.org/ontology#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -56,6 +80,8 @@ ex:kame_1 a ex:Turtle ;
 
 ex:usagi_1 ex:overtakes ex:kame_1 .
 ```
+
+#### Turtle Format (Keio)
 ```
 福沢諭吉は慶應義塾を創設した。
 ```
