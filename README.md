@@ -193,5 +193,36 @@ svc-graphdb                LoadBalancer   10.106.195.26    192.168.33.2   7200:3
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/graphDB-domain.png" width="720"><br>
 
 
-# 4. 単語の関係性が不明なオントロジー
-<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/biology.png" width="720"><br>
+# 4. 単語の関係性が不明なオントロジーからの推論
+
+### 4-1. オントロジーの登録
+以下のTurtle FormatをInspector経由で登録します。ClaudeDesktopから登録しない理由は、LLMのプロンプト履歴に残ってしまう影響を排除したいからです。
+
+```
+@prefix ex: <http://example.org/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# クラス定義
+ex:Organism a owl:Class ;
+    rdfs:label "生物" .
+
+ex:Food a owl:Class ;
+    rdfs:label "食物" .
+
+# プロパティ定義
+ex:eats a owl:ObjectProperty ;
+    rdfs:domain ex:Organism ;
+    rdfs:range ex:Food ;
+    rdfs:label "食べる" .
+
+# インスタンス（テキストから抽出）
+ex:XYZ a ex:Organism ;
+    rdfs:label "XYZ" .
+
+ex:ABC a ex:Food ;
+    rdfs:label "ABC" .
+
+ex:XYZ ex:eats ex:ABC .
+```
