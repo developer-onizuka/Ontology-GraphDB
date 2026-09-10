@@ -6,13 +6,13 @@ Kubernetes, GraphDB, そして Model Context Protocol (MCP) を活用し、LLM�
 
 # 1. Goal
 
-* **マルチドメインオントロジーの構造化と永続化:** 
+* **マルチドメインオントロジーの構造化と永続化:** <br>
   Rabbit（うさぎと亀の寓話）や Keio（慶應義塾の歴史）、Predation（捕食関係）など、多様な非構造化テキストから抽出したオントロジーを独立した Named Graph (`http://example.org/{domain}`) としてGraphDBに厳格に分離・蓄積します。
-* **LLM (Claude Desktop) とのシームレスな統合:** 
+* **LLM (Claude Desktop) とのシームレスな統合:** <br>
   2つの専用MCP（Model Context Protocol）サーバーPodを介して、Claudeが直接GraphDBのリソース状態を確認し、SPARQLクエリの実行やオントロジーの動的登録を行えるインタラクティブな環境を提供します。
-* **Kubernetesによるスケーラブルなインフラ基盤:** 
+* **Kubernetesによるスケーラブルなインフラ基盤:** <br>
   コンテナ化されたGraphDBおよびMCPサーバーをKubernetesクラスター上で堅牢に稼働させ、ネットワーク・ストレージの可用性とモジュール性を担保します。
-* **未知・関係性不明なデータに対するシンボリック推論の確立:**
+* **未知・関係性不明なデータに対するシンボリック推論の確立:** <br>
   XYZ や ABC のように事前知識のない抽象的なシンボルや関係性が不明なデータであっても、オントロジー（スキーマとトリプル）を介して明示的な意味論（Semantics）を付与し、LLM単体では不可能な高精度かつ頑健な推論・検証を実現します。
 
 
