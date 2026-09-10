@@ -1,4 +1,27 @@
 # Ontology-GraphDB
+
+# Ontology-GraphDB
+
+Kubernetes, GraphDB, そして Model Context Protocol (MCP) を活用し、LLM（Claude Desktop）と密連携した**永続的・ドメイン分離型オントロジー管理・検索・推論パイプライン**です。
+
+---
+
+# 1. Goal
+
+* **マルチドメインオントロジーの構造化と永続化:** 
+  Rabbit（うさぎと亀の寓話）や Keio（慶應義塾の歴史）、Predation（捕食関係）など、多様な非構造化テキストから抽出したオントロジーを独立した Named Graph (`http://example.org/{domain}`) としてGraphDBに厳格に分離・蓄積します。
+* **LLM (Claude Desktop) とのシームレスな統合:** 
+  2つの専用MCP（Model Context Protocol）サーバーPodを介して、Claudeが直接GraphDBのリソース状態を確認し、SPARQLクエリの実行やオントロジーの動的登録を行えるインタラクティブな環境を提供します。
+* **Kubernetesによるスケーラブルなインフラ基盤:** 
+  コンテナ化されたGraphDBおよびMCPサーバーをKubernetesクラスター上で堅牢に稼働させ、ネットワーク・ストレージの可用性とモジュール性を担保します。
+
+
+# 2. Overview
+
+本システムは、オントロジーの**「登録・永続化」**を担う `graphDB-mcp` Pod と、**「検索・照会」**を担う `ontology-generic-mcp` Pod の2つの独立したMCPサーバーによって構成されています。GraphDBの `context` パラメータを活用することで、デフォルトグラフを汚さずドメインごとにクリーンな名前付きグラフ管理を実現しています。
+
+#### 2-1. オントロジー登録フロー (Ontology Registration Flow: `graphDB-mcp`)
+
 ```
 [ User ]
    │ 1. Natural Language Prompt / Document Input such as Turtle Format (Rabbit) or (Keio) etc
@@ -22,29 +45,6 @@
 │  - Repository: ontology-repo                           │
 │  - Store triples in the designated Named Graph         │
 │    (e.g., http://example.org/{domain})                 │
-└────────────────────────────────────────────────────────┘
-```
-```
-[ User ]
-   │ 1. Inquiry / Query Request
-   ▼
-┌────────────────────────────────────────────────────────┐
-│ Claude Desktop (LLM Interface)                         │
-│  - Determine necessary query or inspection scope       │
-└──┬─────────────────────────────────────────────────────┘
-   │ 2. Invoke execute_sparql_select / list_named_graphs / describe_resource
-   ▼
-┌────────────────────────────────────────────────────────┐
-│ Kubernetes Pod: ontology-generic-mcp                   │ ontology-generic-mcp.yaml & ontology-generic-mcp.py
-│  - Execute SPARQL SELECT / DESCRIBE queries            │
-│  - Retrieve JSON / Turtle results                      │
-└──┬─────────────────────────────────────────────────────┘
-   │ 3. HTTP GET (SPARQL / DESCRIBE request)
-   ▼
-┌────────────────────────────────────────────────────────┐
-│ GraphDB (Kubernetes)                                   │ graphDB.yaml
-│  - Repository: ontology-repo                           │
-│  - Cross-domain or isolated Named Graph querying       │
 └────────────────────────────────────────────────────────┘
 ```
 #### Turtle Format (Rabbit)
@@ -109,3 +109,29 @@ ex:keio_gijuku a ex:Institution ;
 
 ex:fukuzawa_yukichi ex:founded ex:keio_gijuku .
 ```
+
+#### 2-2. オントロジー検索・参照フロー (Query & Inspection Flow: `ontology-generic-mcp`)
+```
+[ User ]
+   │ 1. Inquiry / Query Request
+   ▼
+┌────────────────────────────────────────────────────────┐
+│ Claude Desktop (LLM Interface)                         │
+│  - Determine necessary query or inspection scope       │
+└──┬─────────────────────────────────────────────────────┘
+   │ 2. Invoke execute_sparql_select / list_named_graphs / describe_resource
+   ▼
+┌────────────────────────────────────────────────────────┐
+│ Kubernetes Pod: ontology-generic-mcp                   │ ontology-generic-mcp.yaml & ontology-generic-mcp.py
+│  - Execute SPARQL SELECT / DESCRIBE queries            │
+│  - Retrieve JSON / Turtle results                      │
+└──┬─────────────────────────────────────────────────────┘
+   │ 3. HTTP GET (SPARQL / DESCRIBE request)
+   ▼
+┌────────────────────────────────────────────────────────┐
+│ GraphDB (Kubernetes)                                   │ graphDB.yaml
+│  - Repository: ontology-repo                           │
+│  - Cross-domain or isolated Named Graph querying       │
+└────────────────────────────────────────────────────────┘
+```
+
