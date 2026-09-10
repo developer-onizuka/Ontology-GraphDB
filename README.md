@@ -222,5 +222,12 @@ ex:ABC a ex:Food ;
 
 ex:XYZ ex:eats ex:ABC .
 ```
-<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/mystery.png" width="720"><br>
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/domain-AAA.png" width="720"><br>
 
+### 4-2. 推論結果の比較
+
+#### オントロジーなし
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/inference1.png" width="720"><br>
+
+#### オントロジーあり
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/inference2.png" width="720"><br>
