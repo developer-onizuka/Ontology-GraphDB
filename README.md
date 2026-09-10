@@ -16,7 +16,7 @@ Kubernetes, GraphDB, そして Model Context Protocol (MCP) を活用し、LLM�
 
 # 2. Overview
 
-本システムは、オントロジーの**「登録・永続化」**を担う `graphDB-mcp` Pod と、**「検索・照会」**を担う `ontology-generic-mcp` Pod の2つの独立したMCPサーバーによって構成されています。GraphDBの `context` パラメータを活用することで、デフォルトグラフを汚さずドメインごとにクリーンな名前付きグラフ管理を実現しています。
+本システムは、オントロジーの　**登録・永続化**　を担う `graphDB-mcp` Pod と、**検索・照会**　を担う `ontology-generic-mcp` Pod の2つの独立したMCPサーバーによって構成されています。GraphDBの `context` パラメータを活用することで、デフォルトグラフを汚さずドメインごとにクリーンな名前付きグラフ管理を実現しています。
 
 #### 2-1. オントロジー登録フロー (Ontology Registration Flow: `graphDB-mcp`)
 
@@ -132,4 +132,12 @@ ex:fukuzawa_yukichi ex:founded ex:keio_gijuku .
 │  - Cross-domain or isolated Named Graph querying       │
 └────────────────────────────────────────────────────────┘
 ```
+
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/biology.png" width="720"><br>
+
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/ClaudeDesktop-rabbit.png" width="720"><br>
+
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/keio.png" width="720"><br>
+
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/ClaudeDesktop-Keio.png" width="720"><br>
 
