@@ -112,6 +112,12 @@ ex:fukuzawa_yukichi ex:founded ex:keio_gijuku .
 ```
 % npx @modelcontextprotocol/inspector http://192.168.33.5:5001/sse
 ```
+なお、このIPアドレス、192.168.33.5は以下の結果に基づくものです。
+```
+$ kubectl get svc svc-graphdb-mcp
+NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
+svc-graphdb-mcp            LoadBalancer   10.109.159.233   192.168.33.5   5001:30791/TCP   10h
+```
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector1.png" width="720"><br>
 
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector2.png" width="720"><br>
@@ -177,6 +183,12 @@ claude_desktop_config.jsonに以下を追加し、ClaudeDesktopを再起動し�
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/keio.png" width="720"><br>
 
 #### 3-3. GraphDBの登録内容
+以下で示されるIPアドレスにブラウザからアクセスしてください。
+```
+$ kubectl get svc svc-graphdb 
+NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
+svc-graphdb                LoadBalancer   10.106.195.26    192.168.33.2   7200:32164/TCP   13h
+```
 
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/graphDB-domain.png" width="720"><br>
 
