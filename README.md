@@ -132,11 +132,45 @@ ex:fukuzawa_yukichi ex:founded ex:keio_gijuku .
 │  - Cross-domain or isolated Named Graph querying       │
 └────────────────────────────────────────────────────────┘
 ```
-### 3. ClaudeDesktopでのオントロジー登録の例
+# 3. ClaudeDesktopを利用したオントロジー登録
+MCPサーバーと連携したClaudeDesktopからの操作の例です。自然言語でGraphDBに登録できるので利便性が高いです。
+
+#### 3-1. ClaudeDesktopとの連携
+claude_desktop_config.jsonに以下を追加し、ClaudeDesktopを再起動します。
+
+```
+  "mcpServers": {
+    "Ontology GraphDB MCP": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://192.168.33.3:5001/sse",
+        "--allow-http"
+      ]
+    },
+    "Register Ontology From Text ": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://192.168.33.5:5001/sse",
+        "--allow-http"
+      ]
+    }
+  },
+```
+
+#### 3-2. ClaudeDesktopでの実行時画面
+
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/ClaudeDesktop-rabbit.png" width="720"><br>
 
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/keio.png" width="720"><br>
 
+#### 3-3. GraphDBの登録内容
 
-### 4. 単語の関係性が不明なオントロジー
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/graphDB-domain.png" width="720"><br>
+
+
+# 4. 単語の関係性が不明なオントロジー
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/biology.png" width="720"><br>
