@@ -230,4 +230,4 @@ ex:XYZ ex:eats ex:ABC .
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/inference1.png" width="720"><br>
 
 #### オントロジーあり
-<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/inference2.png" width="720"><br>
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inference2.png" width="720"><br>
