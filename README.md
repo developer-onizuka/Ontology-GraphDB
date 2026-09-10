@@ -202,27 +202,25 @@ svc-graphdb                LoadBalancer   10.106.195.26    192.168.33.2   7200:3
 @prefix ex: <http://example.org/ontology#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 
-# クラス定義
-ex:Organism a owl:Class ;
-    rdfs:label "生物" .
+ex:Organism a rdfs:Class ;
+    rdfs:label "生物"@ja .
 
-ex:Food a owl:Class ;
-    rdfs:label "食物" .
+ex:Food a rdfs:Class ;
+    rdfs:label "食物"@ja .
 
-# プロパティ定義
-ex:eats a owl:ObjectProperty ;
+ex:eats a rdf:Property ;
     rdfs:domain ex:Organism ;
     rdfs:range ex:Food ;
-    rdfs:label "食べる" .
+    rdfs:label "食べる"@ja .
 
-# インスタンス（テキストから抽出）
 ex:XYZ a ex:Organism ;
-    rdfs:label "XYZ" .
+    rdfs:label "XYZ"@ja .
 
 ex:ABC a ex:Food ;
-    rdfs:label "ABC" .
+    rdfs:label "ABC"@ja .
 
 ex:XYZ ex:eats ex:ABC .
 ```
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/mystery.png" width="720"><br>
+
