@@ -18,7 +18,7 @@ Kubernetes, GraphDB, そして Model Context Protocol (MCP) を活用し、LLM�
 
 本システムは、オントロジーの　**登録・永続化**　を担う `graphDB-mcp` Pod と、**検索・照会**　を担う `ontology-generic-mcp` Pod の2つの独立したMCPサーバーによって構成されています。GraphDBの `context` パラメータを活用することで、デフォルトグラフを汚さずドメインごとにクリーンな名前付きグラフ管理を実現しています。
 
-#### 2-1. オントロジー登録フロー (Ontology Registration Flow: `graphDB-mcp`)
+### 2-1. オントロジー登録フロー (Ontology Registration Flow: `graphDB-mcp`)
 
 ```
 [ User ]
@@ -107,7 +107,7 @@ ex:keio_gijuku a ex:Institution ;
 
 ex:fukuzawa_yukichi ex:founded ex:keio_gijuku .
 ```
-#### 2-1-1. Inspectorによるデバッグ
+### 2-1-1. Inspectorによるデバッグ
 以下コマンドでInspectorを立ち上げます。ここで上記のTurtle Formatを入力して正しくオントロジーが登録されるかを確認します。
 ```
 % npx @modelcontextprotocol/inspector http://192.168.33.5:5001/sse
@@ -123,7 +123,7 @@ svc-graphdb-mcp            LoadBalancer   10.109.159.233   192.168.33.5   5001:3
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector2.png" width="720"><br>
 
 
-#### 2-2. オントロジー検索・参照フロー (Query & Inspection Flow: `ontology-generic-mcp`)
+### 2-2. オントロジー検索・参照フロー (Query & Inspection Flow: `ontology-generic-mcp`)
 ```
 [ User ]
    │ 1. Inquiry / Query Request
@@ -150,7 +150,7 @@ svc-graphdb-mcp            LoadBalancer   10.109.159.233   192.168.33.5   5001:3
 # 3. ClaudeDesktopを利用したオントロジー登録
 MCPサーバーと連携したClaudeDesktopからの操作の例です。自然言語でGraphDBに登録できるので利便性が高いです。
 
-#### 3-1. ClaudeDesktopとの連携
+### 3-1. ClaudeDesktopとの連携
 claude_desktop_config.jsonに以下を追加し、ClaudeDesktopを再起動します。
 
 ```
@@ -176,13 +176,13 @@ claude_desktop_config.jsonに以下を追加し、ClaudeDesktopを再起動し�
   },
 ```
 
-#### 3-2. ClaudeDesktopでの実行時画面
+### 3-2. ClaudeDesktopでの実行時画面
 
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/ClaudeDesktop-rabbit.png" width="720"><br>
 
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/keio.png" width="720"><br>
 
-#### 3-3. GraphDBの登録内容
+### 3-3. GraphDBの登録内容
 以下で示されるIPアドレスにブラウザからアクセスしてください。
 ```
 $ kubectl get svc svc-graphdb 
