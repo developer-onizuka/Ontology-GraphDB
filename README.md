@@ -1,7 +1,5 @@
 # Ontology-GraphDB
 
-# Ontology-GraphDB
-
 Kubernetes, GraphDB, そして Model Context Protocol (MCP) を活用し、LLM（Claude Desktop）と密連携した**永続的・ドメイン分離型オントロジー管理・検索・推論パイプライン**です。
 
 ---
