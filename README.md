@@ -177,6 +177,7 @@ WHERE {
 ```
 
 このほか、GraphDBリポジトリ内に存在するすべてのNamed Graphの一覧をSPARQLで取得することもできます。ここでは2-1で登録した２つのドメインが見て取れるはずです。<br>
+
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector4.png" width="720"><br>
 
 # 3. ClaudeDesktopを利用したオントロジー登録
