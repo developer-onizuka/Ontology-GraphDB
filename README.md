@@ -159,6 +159,23 @@ WHERE {
 ```
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector3.png" width="720"><br>
 
+この結果、以下のような出力が得られるはずで、bindings の中の { "s": ..., "p": ..., "o": ... } が1件で、「主語 s は、述語 p によって、目的語 o と結びつく」という1つの文を表します。これは「福沢諭吉は慶應義塾を創設した」を意味し、元の文そのものです。
+```
+      {
+        "s" : {
+          "type" : "uri",
+          "value" : "http://example.org/ontology/fukuzawa_yukichi"
+        },
+        "p" : {
+          "type" : "uri",
+          "value" : "http://example.org/ontology/founded"
+        },
+        "o" : {
+          "type" : "uri",
+          "value" : "http://example.org/ontology/keio_gijuku"
+        }
+```
+
 このほか、GraphDBリポジトリ内に存在するすべてのNamed Graphの一覧をSPARQLで取得することもできます。ここでは2-1で登録した２つのドメインが見て取れるはずです。<br>
 <img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector4.png" width="720"><br>
 
