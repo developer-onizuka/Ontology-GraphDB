@@ -149,6 +149,19 @@ svc-graphdb-mcp            LoadBalancer   10.109.159.233   192.168.33.5   5001:3
 │  - Cross-domain or isolated Named Graph querying       │
 └────────────────────────────────────────────────────────┘
 ```
+### 2-2-1. Inspectorによるデバッグ
+2-1で登録した内容がGraphDBに意図どおり入っているかを、全体像で確認します。具体的には、GraphDBに対して任意のSPARQL SELECTクエリを実行し、結果をJSON形式で返します。
+```
+SELECT ?s ?p ?o
+WHERE {
+  GRAPH <http://example.org/fukuzawa_yukichi> { ?s ?p ?o }
+}
+```
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector3.png" width="720"><br>
+
+このほか、GraphDBリポジトリ内に存在するすべてのNamed Graphの一覧をSPARQLで取得することもできます。ここでは2-1で登録した２つのドメインが見て取れるはずです。<br>
+<img src="https://github.com/developer-onizuka/Ontology-GraphDB/blob/main/Inspector4.png" width="720"><br>
+
 # 3. ClaudeDesktopを利用したオントロジー登録
 MCPサーバーと連携したClaudeDesktopからの操作の例です。自然言語でGraphDBに登録できるので利便性が高いです。
 
